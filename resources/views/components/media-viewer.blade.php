@@ -91,7 +91,7 @@
         x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 backdrop-blur-sm"
+        class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-sm"
         @click.self="closeLightbox()"
         style="display: none;"
     >
@@ -106,24 +106,25 @@
             <x-heroicon-o-chevron-left class="w-6 h-6" />
         </button>
 
-        {{-- Close button --}}
-        <button
-            @click="closeLightbox()"
-            type="button"
-            class="absolute top-5 right-5 z-10 flex items-center gap-2 px-3 py-2 rounded-full backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 text-white text-sm font-medium transition-all duration-200 shadow-lg"
-            aria-label="Close"
-        >
-            <x-heroicon-o-x-mark class="w-4 h-4" />
-            <span class="text-xs opacity-75">ESC</span>
-        </button>
+        {{-- Image + close button anchored to its top-right corner --}}
+        <div class="relative inline-block">
+            <img
+                :src="lightboxSrc"
+                class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl select-none"
+                alt="Full size preview"
+                draggable="false"
+            >
 
-        {{-- Image --}}
-        <img
-            :src="lightboxSrc"
-            class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl select-none"
-            alt="Full size preview"
-            draggable="false"
-        >
+            {{-- Close button pinned to the top-right corner of the image --}}
+            <button
+                @click="closeLightbox()"
+                type="button"
+                class="absolute -top-4 -right-4 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-white/20 border border-white/30 hover:bg-white/40 text-white transition-all duration-200 shadow-lg backdrop-blur-md"
+                aria-label="Close"
+            >
+                <x-heroicon-o-x-mark class="w-5 h-5" />
+            </button>
+        </div>
 
         {{-- Next button --}}
         <button
