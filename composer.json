@@ -1,0 +1,26 @@
+{
+    "name": "ahmed-abdelrhman/filament-media-gallery",
+    "description": "A Filament infolist entry that renders Spatie Media Library collections with image lightbox and PDF card support.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["filament", "laravel", "media", "gallery", "spatie", "lightbox"],
+    "require": {
+        "php": "^8.2",
+        "filament/filament": "^3.0",
+        "spatie/laravel-medialibrary": "^10.0|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AhmedAbdelrhman\\FilamentMediaGallery\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AhmedAbdelrhman\\FilamentMediaGallery\\FilamentMediaGalleryServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
