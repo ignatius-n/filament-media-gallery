@@ -91,57 +91,60 @@
         x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 flex items-center justify-center"
+        class="fixed inset-0 flex flex-col items-center justify-center gap-4 p-6"
         style="display:none; background-color:rgba(0,0,0,0.85); backdrop-filter:blur(4px); z-index:9999;"
         @click.self="closeLightbox()"
     >
-        {{-- Prev button --}}
-        <button
-            x-show="lightboxImages.length > 1"
-            @click="prevImage()"
-            type="button"
-            class="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors duration-200"
-            aria-label="Previous"
-        >
-            <x-heroicon-o-chevron-left class="w-6 h-6" />
-        </button>
-
-        {{-- Image + close button anchored to its top-right corner --}}
-        <div style="position:relative; display:inline-block;">
-            <img
-                :src="lightboxSrc"
-                class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl select-none"
-                alt="Full size preview"
-                draggable="false"
-            >
-
-            {{-- Close button pinned to the top-right corner of the image --}}
+        {{-- Main row: prev button + image + next button --}}
+        <div class="flex items-center justify-center gap-4 w-full" @click.self="closeLightbox()">
+            {{-- Prev button --}}
             <button
-                @click="closeLightbox()"
+                x-show="lightboxImages.length > 1"
+                @click="prevImage()"
                 type="button"
-                style="position:absolute; top:-14px; right:-14px; z-index:10000;"
-                class="flex items-center justify-center w-9 h-9 rounded-full bg-white/20 border border-white/30 hover:bg-white/40 text-white shadow-lg"
-                aria-label="Close"
+                class="flex-shrink-0 p-2 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors duration-200"
+                aria-label="Previous"
             >
-                <x-heroicon-o-x-mark class="w-5 h-5" />
+                <x-heroicon-o-chevron-left class="w-6 h-6" />
+            </button>
+
+            {{-- Image + close button anchored to its top-right corner --}}
+            <div style="position:relative; display:inline-block; max-height:85vh;">
+                <img
+                    :src="lightboxSrc"
+                    class="max-w-[80vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-2xl select-none"
+                    alt="Full size preview"
+                    draggable="false"
+                >
+
+                {{-- Close button pinned to the top-right corner of the image --}}
+                <button
+                    @click="closeLightbox()"
+                    type="button"
+                    style="position:absolute; top:-14px; right:-14px; z-index:10000;"
+                    class="flex items-center justify-center w-9 h-9 rounded-full bg-white/20 border border-white/30 hover:bg-white/40 text-white shadow-lg"
+                    aria-label="Close"
+                >
+                    <x-heroicon-o-x-mark class="w-5 h-5" />
+                </button>
+            </div>
+
+            {{-- Next button --}}
+            <button
+                x-show="lightboxImages.length > 1"
+                @click="nextImage()"
+                type="button"
+                class="flex-shrink-0 p-2 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors duration-200"
+                aria-label="Next"
+            >
+                <x-heroicon-o-chevron-right class="w-6 h-6" />
             </button>
         </div>
 
-        {{-- Next button --}}
-        <button
-            x-show="lightboxImages.length > 1"
-            @click="nextImage()"
-            type="button"
-            class="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors duration-200"
-            aria-label="Next"
-        >
-            <x-heroicon-o-chevron-right class="w-6 h-6" />
-        </button>
-
-        {{-- Counter --}}
+        {{-- Counter — sits below the image row, horizontally centered --}}
         <div
             x-show="lightboxImages.length > 1"
-            class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm bg-black/50 px-3 py-1 rounded-full select-none"
+            class="text-white text-sm bg-black/50 px-3 py-1 rounded-full select-none"
             x-text="`${lightboxIndex + 1} / ${lightboxImages.length}`"
         ></div>
     </div>
