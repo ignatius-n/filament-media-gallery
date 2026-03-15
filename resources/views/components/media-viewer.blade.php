@@ -87,7 +87,7 @@
                         <img
                             src="{{ $item['thumbUrl'] }}"
                             alt="{{ $item['media']->name }}"
-                            class="w-full h-full object-contain bg-gray-100 dark:bg-gray-900 transition-transform duration-200 group-hover:scale-105"
+                            class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
                         >
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-200 flex items-center justify-center">
                             <x-heroicon-o-magnifying-glass-plus class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 drop-shadow-lg" />
@@ -142,10 +142,10 @@
             </button>
 
             {{-- Image with close button pinned to its top-right corner --}}
-            <div style="position:relative; display:inline-block; max-height:85vh;">
+            <div style="position:relative; display:inline-block; max-height:calc(100vh - 8rem);">
                 <img
                     :src="lightboxSrc"
-                    class="max-w-[80vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-2xl select-none"
+                    class="max-w-[80vw] max-h-[calc(100vh-8rem)] w-auto h-auto object-contain rounded-lg shadow-2xl select-none"
                     alt="Full size preview"
                     draggable="false"
                 >
